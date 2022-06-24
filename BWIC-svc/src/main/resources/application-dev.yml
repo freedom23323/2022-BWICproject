@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:D:/test/ebidding_account
+    username: root
+    password: root1234
+    driverClassName: org.h2.Driver
+
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: none
+    show-sql: true
