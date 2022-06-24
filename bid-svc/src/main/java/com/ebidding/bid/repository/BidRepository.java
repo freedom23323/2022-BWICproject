@@ -15,5 +15,4 @@ public interface BidRepository extends JpaRepository<Bid, String> {
     Optional<List<Bid>> findByBwicid(String bwic);
 
     Optional<List<Bid>> findByClientid(String client);
-
 }
