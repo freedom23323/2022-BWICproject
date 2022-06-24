@@ -23,18 +23,18 @@ public class BidController {
     }
 
     @GetMapping("findByClient")
-    public ResponseEntity<Optional<List<Bid>>> getBitByClient(@RequestParam String id) {
-        return ResponseEntity.ok(this.bidService.getBidByClient(id));
+    public ResponseEntity<Optional<List<Bid>>> getBitByClient(@RequestParam String client) {
+        return ResponseEntity.ok(this.bidService.getBidByClient(client));
     }
 
     @GetMapping("findByBwic")
-    public ResponseEntity<Optional<List<Bid>>> getBitByBwic(@RequestParam String id) {
-        return ResponseEntity.ok(this.bidService.getBidByBwic(id));
+    public ResponseEntity<Optional<List<Bid>>> getBitByBwic(@RequestParam String bwic) {
+        return ResponseEntity.ok(this.bidService.getBidByBwic(bwic));
     }
 
     @GetMapping("findByBwicAndClient")
-    public ResponseEntity<Optional<Bid>> getBitByBwicAndClient(@RequestParam String bid, @RequestParam String cid) {
-        return ResponseEntity.ok(this.bidService.getBidByBwicAndClient(bid, cid));
+    public ResponseEntity<Optional<Bid>> getBitByBwicAndClient(@RequestParam String bwic, @RequestParam String client) {
+        return ResponseEntity.ok(this.bidService.getBidByBwicAndClient(bwic, client));
     }
 
     @GetMapping("getRank")
