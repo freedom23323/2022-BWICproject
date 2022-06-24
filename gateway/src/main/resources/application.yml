@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: account-service
+          uri: http://localhost:8001
+          predicates:
+            - Path=/api/v1/accounts/**
+        - id: bid-service
+          uri: http://localhost:8002
+          predicates:
+            - Path=/api/v1/bid/**
+          filters:
+            - JWTFilter
+        - id: bwic-service
+          uri: http://localhost:8003
+          predicates:
+            - Path=api/v1/bwic/**
+          filters:
+            - JWTFilter
