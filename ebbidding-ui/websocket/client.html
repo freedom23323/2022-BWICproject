@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Client</title>
+</head>
+
+<body>
+    <script>
+        var ws = new WebSocket('ws://localhost:3000');
+
+        ws.onopen = function (res) {
+            console.log("Connected.")
+
+            // Send message
+            setInterval(function () {
+                ws.send("Client Message: " + new Date());
+            }, 5000
+            )
+        }
+
+        // Close event
+        ws.onclose = function (res) {
+            console.log("Closed");
+        }
+
+
+        // Error event
+        ws.onerror = function (error) {
+            console.log("Error", error)
+        }
+
+
+        // Message event
+        ws.onmessage = function (res) {
+            console.log(res)
+        }
+    </script>
+</body>
+
+</html>
