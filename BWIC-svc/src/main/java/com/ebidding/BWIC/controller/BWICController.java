@@ -2,7 +2,7 @@ package com.ebidding.BWIC.controller;
 
 import com.ebidding.BWIC.domain.BWIC;
 import com.ebidding.BWIC.service.BWICService;
-import com.ebidding.account.AccountDto;
+import com.ebidding.bwic.BWICDto;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +34,16 @@ public class BWICController {
     @GetMapping()
     // GET http://localhost:8080/api/v1/accounts
     // GET http://localhost:8080/api/v1/accounts/?name=${name}
-    public ResponseEntity<BWIC> getBWIC(@RequestParam String cusip) {
-        return ResponseEntity.ok(modelMapper.map(this.bwicService.getBWICByCusip(cusip), BWIC.class));
+    public ResponseEntity<BWICDto> getBWIC(@RequestParam String cusip) {
+        return ResponseEntity.ok(modelMapper.map(this.bwicService.getBWICByCusip(cusip), BWICDto.class));
+    }
+
+    @GetMapping("value=/BWICcable")
+    // GET http://localhost:8080/api/v1/accounts
+    // GET http://localhost:8080/api/v1/accounts/?name=${name}
+    public Boolean BWICcable(@RequestParam Integer bwic_id) {
+         if(this.bwicService.findBWICcable(bwic_id)==null)return false;
+         return true;
     }
 
     @GetMapping("value=/ActiveBWIC")
@@ -44,11 +52,11 @@ public class BWICController {
     }
 
     @PostMapping("value=/BWICAdd")
-    public BWIC bwicAdd(@RequestParam("id") Integer id,@RequestParam("cusip") String cusip,
+    public BWIC bwicAdd(@RequestParam("cusip") String cusip,
                            @RequestParam("size") Integer size, @RequestParam("startingprice") Integer startingprice,
                            @RequestParam("duedate") Date duedate) {
         BWIC bwic=new BWIC();
-        bwic.setId(id);
+        //bwic.setId(id);
         bwic.setCusip(cusip);
         bwic.setSize(size);
         bwic.setStartingprice(startingprice);

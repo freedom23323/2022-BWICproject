@@ -29,7 +29,7 @@
 
         <dependency>
             <groupId>com.ebidding</groupId>
-            <artifactId>account-api</artifactId>
+            <artifactId>BWIC-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
@@ -37,6 +37,12 @@
             <groupId>com.ebidding</groupId>
             <artifactId>common-lib</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ebidding</groupId>
+            <artifactId>BWIC-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
