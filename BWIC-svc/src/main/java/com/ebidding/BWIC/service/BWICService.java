@@ -19,9 +19,15 @@ public class BWICService {
     public BWICDto getBWICByCusip(String cusip) {
         return this.bwicRepository.findByCusip(cusip).orElse(null);
     }
+    public BWIC getBWICById(Integer id) {
+        return this.bwicRepository.findById(id).orElse(null);
+    }
 
     public List<BWIC> findBWICActive(){return this.bwicRepository.findBWICActive();}
 
+    public List<BWIC> findAllBWIC(){return this.bwicRepository.findAllBWIC();}
+
+    public List<BWIC> findAllByCusip(String cusip){return this.bwicRepository.findAllByCusip(cusip);}
     public  BWIC findBWICcable(Integer bwic_id){return this.bwicRepository.findBWICcable(bwic_id);}
     public BWIC save(BWIC bwic) {
         return this.bwicRepository.saveAndFlush(bwic);
