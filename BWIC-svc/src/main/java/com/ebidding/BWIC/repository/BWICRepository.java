@@ -22,7 +22,7 @@ public interface BWICRepository extends JpaRepository<BWIC, String> {
     @Query(value = "select * from BWIC where cusip=Cusip",nativeQuery = true)
     List<BWIC>findAllByCusip(String Cusip);
 
-    @Query(value = "select * from BWIC",nativeQuery = true)
+    @Query(value = "select * from bwic",nativeQuery = true)
     List<BWIC> findAllBWIC();
 
     @Query(value = "select * from BWIC where id==bwic_id and duedate>now()",nativeQuery = true)

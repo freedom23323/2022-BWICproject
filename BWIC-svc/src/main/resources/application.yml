@@ -1,7 +1,12 @@
 spring:
   profiles:
     active: uat
-
+  datasource:
+    url: jdbc:mysql://${BWIC_DATASOURCE_URL}/ebidding_bwic?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: ${BWIC_DATASOURCE_USERNAME}
+    password: ${BWIC_DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
 
 server:
   port: 8003

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://47.109.33.101/ebidding-bwic?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: cq-team
+    password: cq-team!
+
+server:
+  port: 8003
