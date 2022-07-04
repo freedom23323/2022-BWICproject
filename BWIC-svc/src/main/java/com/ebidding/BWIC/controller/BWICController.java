@@ -1,8 +1,11 @@
 package com.ebidding.BWIC.controller;
 
 import com.ebidding.BWIC.domain.BWIC;
+import com.ebidding.BWIC.domain.BWICPostCusip;
+import com.ebidding.BWIC.domain.BWICPostId;
 import com.ebidding.BWIC.service.BWICService;
-import com.ebidding.account.AccountDto;
+import com.ebidding.bwic.BWICDto;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,50 +37,83 @@ public class BWICController {
     @GetMapping()
     // GET http://localhost:8080/api/v1/accounts
     // GET http://localhost:8080/api/v1/accounts/?name=${name}
-    public ResponseEntity<BWIC> getBWIC(@RequestParam String cusip) {
-        return ResponseEntity.ok(modelMapper.map(this.bwicService.getBWICByCusip(cusip), BWIC.class));
+    public ResponseEntity<BWICDto> getBWIC(@RequestParam String cusip) {
+        return ResponseEntity.ok(modelMapper.map(this.bwicService.getBWICByCusip(cusip), BWICDto.class));
+    }
+
+    @GetMapping("getBWICById")
+    public ResponseEntity<BWIC> getBWICById(@RequestParam Integer id) {
+        return ResponseEntity.ok(this.bwicService.getBWICById(id));
+    }
+
+
+    @GetMapping("value=/BWICcable")
+    // GET http://localhost:8080/api/v1/accounts
+    // GET http://localhost:8080/api/v1/accounts/?name=${name}
+    public Boolean BWICcable(@RequestParam Integer bwic_id) {
+         if(this.bwicService.findBWICcable(bwic_id)==null)return false;
+         return true;
     }
 
     @GetMapping("value=/ActiveBWIC")
     public List<BWIC> getBWIC() {
         return modelMapper.map(bwicService.findBWICActive(),new TypeToken<List<BWIC>>() {}.getType());
     }
+    @GetMapping("value=/AllBWIC")
+    public List<BWIC> getAllBWIC() {
+        return modelMapper.map(bwicService.findAllBWIC(),new TypeToken<List<BWIC>>() {}.getType());
+    }
+
+//    @GetMapping("value=/findBWICByCusip")
+//    public List<BWIC> getAllByCuisp(@RequestBody BWICPostCusip cusip) {
+//        String Cusip= cusip.getCusip();
+//        return modelMapper.map(bwicService.findAllByCusip(Cusip),new TypeToken<List<BWIC>>() {}.getType());
+//    }
 
     @PostMapping("value=/BWICAdd")
-    public BWIC bwicAdd(@RequestParam("id") Integer id,@RequestParam("cusip") String cusip,
-                           @RequestParam("size") Integer size, @RequestParam("startingprice") Integer startingprice,
-                           @RequestParam("duedate") Date duedate) {
-        BWIC bwic=new BWIC();
-        bwic.setId(id);
-        bwic.setCusip(cusip);
-        bwic.setSize(size);
-        bwic.setStartingprice(startingprice);
-        bwic.setDuedate(duedate);
+    public BWIC bwicAdd( @RequestBody BWIC bwic
+//            @RequestBody String cusip,
+//                           @RequestBody Integer size, @RequestBody  Integer startingprice,
+//                           @RequestBody  Date duedate
+    ) {
+//        BWIC bwic=new BWIC();
+//        //bwic.setId(id);
+//        bwic.setCusip(cusip);
+//        bwic.setSize(size);
+//        bwic.setStartingprice(startingprice);
+//        bwic.setDuedate(duedate);
         return bwicService.save(bwic);
     }
     //删除数据
-    @DeleteMapping("/deleteBWIC/{id}")
-    public void bwicDelete(@RequestParam("id") Integer id) {
+    @PostMapping("/deleteBWIC")
+    public void bwicDelete(@RequestBody BWICPostId bwicPost) {
         BWIC bwic=new BWIC();
-        bwic.setId(id);
+        bwic.setId(bwicPost.getId());
+//        bwicService.delete(bwic);
         bwicService.delete(bwic);
-    }
+
+}
 
     //更改数据
-    @PutMapping("value=/BWICupdate")
-    public BWIC bwicupdate(@RequestParam("id") Integer id,@RequestParam("cusip") String cusip,
-                        @RequestParam("size") Integer size, @RequestParam("startingprice") Integer startingprice,
-                        @RequestParam("duedate") Date duedate) {
-        /*BWIC bwic=new BWIC();
-        bwic.setId(cusip);
-        bwicService.delete(bwic);*/
-        BWIC bwic1=new BWIC();
-        bwic1.setId(id);
-        bwic1.setCusip(cusip);
-        bwic1.setSize(size);
-        bwic1.setStartingprice(startingprice);
-        bwic1.setDuedate(duedate);
-        return bwicService.save(bwic1);
+//    @PutMapping("value=/BWICupdate")
+//    public BWIC bwicupdate(@RequestParam("id") Integer id,@RequestParam("cusip") String cusip,
+//                        @RequestParam("size") Integer size, @RequestParam("startingprice") Integer startingprice,
+//                        @RequestParam("duedate") Date duedate) {
+//        /*BWIC bwic=new BWIC();
+//        bwic.setId(cusip);
+//        bwicService.delete(bwic);*/
+//        BWIC bwic1=new BWIC();
+//        bwic1.setId(id);
+//        bwic1.setCusip(cusip);
+//        bwic1.setSize(size);
+//        bwic1.setStartingprice(startingprice);
+//        bwic1.setDuedate(duedate);
+//        return bwicService.save(bwic1);
+//    }
+
+    @PostMapping("value=/BWICupdate")
+    public BWIC bwicupadte(@RequestBody BWIC bwic){
+        return bwicService.save(bwic);
     }
 
     //日期格式进行转换

@@ -1,0 +1,32 @@
+.container{
+    text-align: center;
+    width: 100wh;
+    margin: 10px;
+    .form-panel{
+        width: 400px;
+        margin: 0 auto;
+    
+        .form-group{
+            padding: 5px;
+            display: flex;
+            justify-content: space-between;
+
+            .button-group{
+                margin-top: 10px;
+            }
+        }
+    }
+}
+
+.aaa{
+    //width: 200%;
+    background: url("../../img/1.png")no-repeat;
+    background-size: 100% 100%;
+            background-repeat: no-repeat;
+            position: absolute;
+            padding: 0px;
+            width: 100%;
+            height: 15%;
+            top: 0;
+            left: 0;
+}

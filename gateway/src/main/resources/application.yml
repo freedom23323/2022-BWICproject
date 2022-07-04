@@ -1,6 +1,12 @@
 spring:
   cloud:
     gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
       routes:
         - id: account-service
           uri: http://localhost:8001
@@ -15,6 +21,4 @@ spring:
         - id: bwic-service
           uri: http://localhost:8003
           predicates:
-            - Path=api/v1/bwic/**
-          filters:
-            - JWTFilter
+            - Path=/api/v1/bwic/**
